@@ -1,4 +1,3 @@
-// Navbar.tsx
 "use client";
 import { useState } from 'react';
 import Link from 'next/link';
@@ -9,12 +8,12 @@ const Navbar = () => {
 
   const navVariants = {
     open: { x: 0, transition: { type: 'spring', stiffness: 300, damping: 30 } },
-    closed: { x: '-100%', transition: { delay: 0.5, type: 'spring', stiffness: 300, damping: 30 } }
+    closed: { x: '-100%', transition: { delay: 0.5, type: 'spring', stiffness: 300, damping: 30 } },
   };
 
   const linkVariants = {
     open: { opacity: 1, x: 0 },
-    closed: { opacity: 0, x: -50 }
+    closed: { opacity: 0, x: -50 },
   };
 
   const menuItems = [
@@ -28,6 +27,7 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Hamburger Menu Button */}
       <motion.button
         className="fixed top-6 right-6 z-50 p-3 mix-blend-difference"
         onClick={() => setIsOpen(!isOpen)}
@@ -35,17 +35,18 @@ const Navbar = () => {
       >
         <svg width="40" height="40" viewBox="0 0 24 24">
           <motion.path
-            stroke="#00f0ff"
+            stroke="#00f0ff" // Cyan color for the hamburger lines
             strokeWidth="3"
             animate={isOpen ? "open" : "closed"}
             variants={{
               closed: { d: "M2 6 L22 6 M2 12 L22 12 M2 18 L22 18" },
-              open: { d: "M4 4 L20 20 M4 20 L20 4" }
+              open: { d: "M4 4 L20 20 M4 20 L20 4" },
             }}
           />
         </svg>
       </motion.button>
 
+      {/* Navigation Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.nav
@@ -64,9 +65,11 @@ const Navbar = () => {
                 >
                   <Link
                     href={item.href}
-                    className="text-4xl font-bungee hover:text-neon-pink transition-colors"
-                    style={{ textShadow: '0 0 15px rgba(255,0,255,0.5)' }}
-                    onClick={() => setIsOpen(false)}
+                    className="text-4xl font-bungee text-neon-pink hover:text-cyan transition-colors"
+                    style={{
+                      textShadow: '0 0 15px rgba(255, 0, 255, 0.7)', // Neon pink glow effect
+                    }}
+                    onClick={() => setIsOpen(false)} // Close menu on link click
                   >
                     {item.name}
                   </Link>
